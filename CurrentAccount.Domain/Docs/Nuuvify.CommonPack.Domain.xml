@@ -1,0 +1,615 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nuuvify.CommonPack.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.AtivarFuncao">
+            <summary>
+            N = Desativar
+            S = Ativar
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.CodigoSistema">
+            <summary>
+            REINF
+            SAP
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.EnumAtivoInativo">
+            <summary>
+            Informar "A" para Ativo
+            Informar "I" para Inativo
+            Informar "N" Ativo e Inativo
+                 N - Deve ser utilizado para selecionar dados apenas, não para classificar um cadastro.
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.EnumFisicaJuridica">
+            <summary>
+            Informar "F" para pessoa Fisica
+            Informar “J” para pessoa Juridica
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.EnumSimNao">
+            <summary>
+            Informar "S" para Sim
+            Informar "N" para Não
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.FuncaoOpcao">
+            <summary>
+            BLOCO = Para Calcular de Diversos Lançamentos (acumulando base e valores) sem Gravar
+            SEMACENTROS = Retirar Acentos das Mensagens de Retorno
+            TRACE = Habilita o Log de Execução das Procedures
+            LIMPAR = Apaga Configurações, Resultados e Lançamentos Calculados do Usuário ou Sistema Informado
+                    (Quando não Informado Usuário e Sistema serão Excluídos de Todos Usuários e Sistemas)
+            SEMCOMMIT = Desabilita a Confirmação Automática de Transações
+            SEMCONTROLE = Desabilita o Controle Multiusuário de Cálculo/Gravação
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.TipoContaBancaria">
+            <summary>
+            N = Não possui conta bancaria
+            S = Conta Corrente
+            P = Conta Poupança
+            C = Conta Conjunta
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.TipoDocumentoEmitido">
+            <summary>
+            0 = Nao definido
+            1 = Nota Fiscal Convencional
+            2 = Nota Fiscal Eletronica
+            </summary>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValueObjects.AtivoInativo.#ctor(System.String)">
+            <summary>
+            Valida a situação conforme o <see cref="T:Nuuvify.CommonPack.Domain.ValueObjects.EnumAtivoInativo"/>
+            </summary>
+            <param name="situacao">Ativo, Invativo, Ambos ou A, I, N</param>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.ValueObjects.AtivoInativo.Codigo">
+            <summary>
+            Retorna os valores literais ou description do enum
+            <see cref="T:Nuuvify.CommonPack.Domain.ValueObjects.EnumAtivoInativo"/>
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.ValueObjects.Cnpj.Codigo">
+            <summary>
+            Cnpj da empresa sem mascara, apenas numeros
+            </summary>
+            <example>61064911000177</example>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValueObjects.Cnpj.Mascara">
+            <summary>
+            Formatar uma string Cnpj
+            </summary>
+            <returns>string Cnpj formatada</returns>
+            <example>Recebe '99999999999999' Devolve '99.999.999/9999-99'</example>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValueObjects.Cpf.Mascara">
+            <summary>
+            Formatar uma string CPF
+            </summary>
+            <returns>string CPF formatada</returns>
+            <example>Recebe '99999999999' Devolve '999.999.999-99'</example>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.IE">
+            <summary>
+            Valida Inscrição Estadual por estado
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.MsgValueObjects">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.ValueObjects.MsgValueObjects.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.ValueObjects.MsgValueObjects.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.ValueObjects.MsgValueObjects.IEInvalido">
+            <summary>
+              Looks up a localized string similar to Inscrição Estadual {ie} is invalid to Uf {uf}.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.ValueObjects.MsgValueObjects.ValueObjectInvalid">
+            <summary>
+              Looks up a localized string similar to Code {valueObject} is invalid..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.ValueObjects.SkipTake.Skip">
+            <summary>
+            Registros para serem desconsiderados (saltados)
+            </summary>
+            <example>0</example>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.ValueObjects.SkipTake.Take">
+            <summary>
+            Registros para serem exibidos
+            </summary>
+            <example>25</example>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValueObjects.SkipTake.HasPagination">
+            <summary>
+            Retorna true caso o Take for maior que 0 <br/>
+            Quando take = 0 os metodos que usam essa classe irão ignorar paginação
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValueObjects.SkipTake.MinTake">
+            <summary>
+            Retorna 25 caso o Take for menor ou igual a 0, caso contrario retorna o valor da propriedade Take
+            </summary>
+            <example>25</example>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ValueObjects.TipoPessoa">
+            <summary>
+            Toda pessoa fisica precisa ter uma data de nascimento valida
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertAreEquals">
+            <summary>
+              Looks up a localized string similar to Field {name} should be equals to {value}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertAreEqualsObject">
+            <summary>
+              Looks up a localized string similar to Object {name} should be equals to {value}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertContains">
+            <summary>
+              Looks up a localized string similar to Field {name} must be contains {value}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertContainsArray">
+            <summary>
+              Looks up a localized string similar to Field {name} must be contains a valid value from the list..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertContainsArrayNull">
+            <summary>
+              Looks up a localized string similar to List is null..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertDateTimeNull">
+            <summary>
+              Looks up a localized string similar to Field {name} should not have a date..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertFixedLength">
+            <summary>
+              Looks up a localized string similar to Field {name} must have exactly {length} characters..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertHasMaxLength">
+            <summary>
+              Looks up a localized string similar to Field {name} must be at max {max} characters..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertHasMinLength">
+            <summary>
+              Looks up a localized string similar to Field {name} must have at least {min} characters..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsBetween">
+            <summary>
+              Looks up a localized string similar to Field {name} must be between {a} and {b}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsEmail">
+            <summary>
+              Looks up a localized string similar to Field {name} must be a valid E-mail address..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsGreaterOrEqualsThan">
+            <summary>
+              Looks up a localized string similar to Field {name} must be greater or equal than {number}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsGreaterThan">
+            <summary>
+              Looks up a localized string similar to Field {name} must be greater than {number}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsLowerOrEqualsThan">
+            <summary>
+              Looks up a localized string similar to Field {name} must be lower or equal than {number}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsLowerThan">
+            <summary>
+              Looks up a localized string similar to Field {name} must be lower than {number}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsNull">
+            <summary>
+              Looks up a localized string similar to Object {name} must be null..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsNullOrWhiteSpace">
+            <summary>
+              Looks up a localized string similar to Field {name} must be null or white..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsRequired">
+            <summary>
+              Looks up a localized string similar to Field {name} is required..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsTelephone">
+            <summary>
+              Looks up a localized string similar to Field {name} must be a valid Telephone number..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsTrue">
+            <summary>
+              Looks up a localized string similar to Field {field} should be true..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertIsUrl">
+            <summary>
+              Looks up a localized string similar to Field {name} must be a valid URL..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertNotAreEquals">
+            <summary>
+              Looks up a localized string similar to Field {name} not must be equals to {value}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertNotAreEqualsObject">
+            <summary>
+              Looks up a localized string similar to Object {name} not must be equals to {value}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertNotDateTimeNull">
+            <summary>
+              Looks up a localized string similar to Field {name} must be a valid date..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertNotIsNull">
+            <summary>
+              Looks up a localized string similar to Object {name} should not be null..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertNotIsNullOrWhiteSpace">
+            <summary>
+              Looks up a localized string similar to Field {name} should not be null or white..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertRegexIsMatches">
+            <summary>
+              Looks up a localized string similar to Field {name} must have the expression {value}..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.AssertRegexIsMatches_Null">
+            <summary>
+              Looks up a localized string similar to Field {name} must have an expression, not null..
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.FluentValidatorR.MsgFluentValidator.SelectorNull">
+            <summary>
+              Looks up a localized string similar to Selector: {selector} must not be null, so that it is possible to perform the verification..
+            </summary>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.RemoveSelectorMessage">
+            <summary>
+            Esse metodo remove as mensagens de Selector: nulo. Isso é util quando você personaliza suas mensagens
+            e não deseja que a mensagem default seja lançada.
+            <para>Esse metodo deve ser chamado sempre em ultimo lugar no ValidationConcernR</para>
+            <para>Usage:</para>
+            <example>
+            <code>
+             new ValidationConcernR{OtherClass}(otherClass)
+                 .AssertIsNull(otherClass)
+                 .AssertNotIsNull(customer, messageExpected)
+                 .AssertHasMinLength(x => customer.Name, 10)
+                 .AssertIsGreaterOrEqualsThan(x => customer.Height, 10D)
+                 .RemoveSelectorMessage();
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertNotIsNull(`0,System.String,System.String)">
+            <summary>
+            Usage: 
+            <example>
+            <code>
+                   var valido = new ValidationConcernR{Customer}(_customer)
+                        .AssertNotIsNull(_customer);
+            </code>
+            </example>
+            </summary>
+            <param name="objectVerification">Object check</param>
+            <param name="message">Custom Message</param>
+            <param name="aggregateId">Aggregate id or any information that allows identifying this message in a collection</param>
+            <returns>Errors.Count</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertNotIsNull``1(``0,System.String,System.String)">
+            <summary>
+            Usage: 
+            <example>
+            <code>
+                   var valido = new ValidationConcernR{Customer}(_customer)
+                        .AssertNotIsNull{OtherClass}(_otherClass);
+            </code>
+            </example>
+            </summary>
+            <param name="objectVerification">Another class for verification, other than typed class</param>
+            <param name="message">Custom Message</param>
+            <param name="aggregateId">Aggregate id or any information that allows identifying this message in a collection</param>
+            <returns>Errors.Count</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertIsNull(`0,System.String,System.String)">
+            <summary>
+            Usage: 
+            <example>
+            <code>
+                   var valido = new ValidationConcernR{Customer}(_customer)
+                        .AssertIsNull(_customer);
+            </code>
+            </example>
+            </summary>
+            <param name="objectVerification">Object check</param>
+            <param name="message">Custom Message</param>
+            <param name="aggregateId">Aggregate id or any information that allows identifying this message in a collection</param>
+            <returns>Errors.Count</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertIsNull``1(``0,System.String,System.String)">
+            <summary>
+            Usage: 
+            <example>
+            <code>
+                   var valido = new ValidationConcernR{Customer}(_customer)
+                        .AssertIsNull{OtherClass}(_otherClass)
+            </code>
+            </example>
+            </summary>
+            <param name="objectVerification">Another class for verification, other than typed class</param>
+            <param name="message">Custom Message</param>
+            <param name="aggregateId">Aggregate id or any information that allows identifying this message in a collection</param>
+            <returns>Errors.Count</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertAreEquals(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean,System.String,System.String)">
+            <summary>
+            Usage: 
+            <example>
+            <code>
+                   var valido = new ValidationConcernR{Customer}(_customer)
+                        .AssertAreEquals(x => x.Qtd + 10 == 50, true);
+            </code>
+            </example>
+            </summary>
+            <param name="selector">Lambda Expression</param>
+            <param name="val">Expected result of verification</param>
+            <param name="message">Custom Message</param>
+            <param name="aggregateId">Aggregate id or any information that allows identifying this message in a collection</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertAreEquals(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String)">
+            <summary>
+            Usage: 
+            <example>
+            <code>
+                   var valido = new ValidationConcernR{Customer}(_customer)
+                        .AssertAreEquals(x => x.Name, "João");
+            </code>
+            </example>
+            </summary>
+            <param name="selector">Lambda Expression</param>
+            <param name="message">Custom Message</param>
+            <param name="aggregateId">Aggregate id or any information that allows identifying this message in a collection</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertNotAreEquals(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Boolean,System.String,System.String)">
+            <summary>
+            Usage: 
+            <example>
+            <code>
+                   var valido = new ValidationConcernR{Customer}(_customer)
+                        .AssertNotAreEquals(x => x.Name == "João", false);
+            </code>
+            </example>
+            </summary>
+            <param name="selector">Lambda Expression</param>
+            <param name="val">Expected result of verification</param>
+            <param name="message">Custom Message</param>
+            <param name="aggregateId">Aggregate id or any information that allows identifying this message in a collection</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertNotAreEquals(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String)">
+            <summary>
+            Usage: 
+            <example>
+            <code>
+                   var valido = new ValidationConcernR{Customer}(_customer)
+                        .AssertNotAreEquals(x => x.Name, "João");
+            </code>
+            </example>
+            </summary>
+            <param name="selector">Lambda Expression</param>
+            <param name="message">Custom Message</param>
+            <param name="aggregateId">Aggregate id or any information that allows identifying this message in a collection</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertIsTrue(System.Boolean,System.String,System.String,System.String)">
+            <summary>
+            Usage: 
+            <example>
+            <code>
+                   var valido = new ValidationConcernR{Customer}(_customer)
+                        .AssertIsTrue(_customer.Name.Equal("Fulano"), nameof(_customer.Name));
+            </code>
+            </example>
+            </summary>
+            <param name="value">Comparation result</param>
+            <param name="field">Name of property (any)</param>
+            <param name="message">Custom Message</param>
+            <param name="aggregateId">Aggregate id or any information that allows identifying this message in a collection</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertIsTrue(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.String,System.String)">
+            <summary>
+            Usage: 
+            <example>
+            <code>
+                   var valido = new ValidationConcernR{Customer}(_customer)
+                        .AssertIsTrue(x => x.Name.Equal("Fulano"));
+            </code>
+            </example>
+            </summary>
+            <param name="selector"></param>
+            <param name="message">Custom Message</param>
+            <param name="aggregateId">Aggregate id or any information that allows identifying this message in a collection</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.ValidationConcernR`1.AssertIsTelephone(System.Linq.Expressions.Expression{System.Func{`0,System.String}},System.String,System.String)">
+            <summary>
+            Atende ao formato 08007713451 sem espaços ou traço
+            Atende ao formato (19)2106-2597 dois ou trs digitos no DDD e numero com 8 ou 9 digitos, seprado por traço
+            Atende ao formato XXX telefone de operadoras
+            </summary>
+            <param name="selector">Prorpiedade ou variavel</param>
+            <param name="message">Não é obrigatorio, se não informado retornara mensagem padrão</param>
+            <param name="aggregateId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.AggregateRoot">
+            <summary>
+            Utilize esta classe, como base para suas classes que representem o ponto de entrada
+            da raiz de agregação
+            </summary>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.BaseSpecification`1.#ctor(Nuuvify.CommonPack.Extensions.Interfaces.IRepositoryValidation)">
+            <summary>
+            Apenas um repositorio deve ser utilizado, se estiver precisando mais de um
+            muito provavelmente você precisa quebrar sua especificação, ou melhorar o 
+            repositorio
+            </summary>
+            <param name="repository"></param>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.DomainEvent`1">
+            <summary>
+            Use essa classe base em uma classe de outro contexto, para que ela seja disparada pelo mediator.Publish(SuaClasseCommandResult)
+            Exemplo:
+            onde a classe TransportadorObserve, é outro contexto e, SuaClasseCommandResult foi populada no contexto original.
+            public class TransportadorObserve : INotificationHandler{SuaClasseCommandResult}
+            </summary>
+            <typeparam name="TSourceId">Representa um object, que devera ser utilizado em um Observable</typeparam>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.DomainEvent`1.Version">
+            <summary>
+            Pode ser utilizado com qualquer valor util para identificar esse evento,
+            ou informe o RequestConfiguration.CorrelationId
+            </summary>
+            <example>Daf_AAAAA-BBBBB-CCCC</example>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.Interfaces.ISpecification`1.IsSatisfactory(`0)">
+            <summary>
+            Deve retornar <c>await Task.CompletedTask;</c>
+            <para>Deve ser utilizado AddNotification() ou new ValidationConcernR{SuaClasse}(this)</para>
+            <para>para incluir uma lista de notificações</para>
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Domain.Interfaces.IValidation`2.Valid(`0)">
+            <summary>
+            Deve retornar <c>await Task.CompletedTask;</c>
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ICommandR">
+            <summary>
+            Use essa interface quando deseja criar um Command para ser enviado a um Handler,
+            utilizando _mediator.Send(SeuCommand)
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.ICommandR.SaveChanges">
+            <summary>
+            Utilizado em um Handle, para chamar ou não o SaveChanges do Respository
+            util em casos de processamento dentro de um laço, onde a gravação deve 
+            ocorrer apenas no final, ou mesmo, em um processo que envolva varias 
+            alterações no banco de dados, por diversas classes diferentes, mas o 
+            SaveChanges deve ocorrer apenas uma vez, se esse for seu caso, deixe
+            esse valor como false, e dentro do Handle utilize:
+            <example>
+            <code>
+                await _repository.SaveChangesAsync(toSave: request.SaveChanges);
+            </code>
+            </example>
+            Onde request, é uma classe (FornecedorAdicionarCommand) que implementa
+            ICommandR
+            </summary>
+            <value>true</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.Domain.ICommandR.RemoveNotificationsBeginning">
+            <summary>
+            Em um processamento dentro de um laço, você pode querer remover as notificações
+            em cada registro, caso faça sentido, atribua true, e inclua um codigo como esse
+            em seu Handle:
+            <example>
+            <code>
+                RemoveNotifications(removeAll: request.RemoveNotificationsBeginning);
+            </code>
+            </example>
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.ICommandResultR">
+            <summary>
+            Use essa interface quando desejar retornar um objeto pelo Handler
+            <para>
+            Também pode ser utilizada para criar uma classe de publish do MediatR para
+            notificar algum evento, para uma ou mais classes que implementem:
+            </para>
+            <para>
+            public class ClienteObserve : INotificationHandler{SuaClasseNotification}
+            </para>
+            <para>
+            public class FornecedorObserve : INotificationHandler{SuaClasseNotification}
+            </para>
+            <para>
+            public class TransportadorObserve : INotificationHandler{SuaClasseNotification}
+            </para>
+            <para>
+            onde: SuaClasseNotification : ICommandResultR
+            </para>
+            <para>
+            nesse caso o gatilho seria _mediator.Publish(SuaClasseNotification)
+            </para>
+            <para>
+            Isso dispararia ao mesmo tempo as classes ClienteObserve, FornecedorObserve e TransportadorObserve
+            </para>
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Domain.NotificationResult">
+            <summary>
+            Essa clase deve ser utilizada para manipular informações entre camadas "projetos", 
+            que não tenha o intuito de Erro, ou inconsistencia de dados, apenas mensagens para avisar
+            o client ou utilizar como log
+            Se sua necessidade é manipular informações entre camadas, para retornar erro ao client,
+            utilize NotificationR
+            </summary>
+        </member>
+    </members>
+</doc>

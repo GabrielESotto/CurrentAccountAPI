@@ -1,0 +1,770 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nuuvify.CommonPack.UnitOfWork.Abstraction</name>
+    </assembly>
+    <members>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1">
+            <summary>
+            Represents the default implementation of the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> interface.
+            </summary>
+            <typeparam name="T">The type of the data to page</typeparam>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1.PageIndex">
+            <summary>
+            Gets or sets the index of the page.
+            </summary>
+            <value>The index of the page.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1.PageSize">
+            <summary>
+            Gets or sets the size of the page.
+            </summary>
+            <value>The size of the page.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1.TotalCount">
+            <summary>
+            Gets or sets the total count.
+            </summary>
+            <value>The total count.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1.TotalPages">
+            <summary>
+            Gets or sets the total pages.
+            </summary>
+            <value>The total pages.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1.IndexFrom">
+            <summary>
+            Gets or sets the index from.
+            </summary>
+            <value>The index from.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1.Items">
+            <summary>
+            Gets or sets the items.
+            </summary>
+            <value>The items.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1.HasPreviousPage">
+            <summary>
+            Gets the has previous page.
+            </summary>
+            <value>The has previous page.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1.HasNextPage">
+            <summary>
+            Gets the has next page.
+            </summary>
+            <value>The has next page.</value>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1" /> class.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="pageIndex">The index of the page</param>
+            <param name="pageSize">The size of the page</param>
+            <param name="indexFrom">The start index value</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`1" /> class.
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2">
+            <summary>
+            Provides the implementation of the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> and converter.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TResult">The type of the result.</typeparam>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2.PageIndex">
+            <summary>
+            Gets the index of the page.
+            </summary>
+            <value>10</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2.PageSize">
+            <summary>
+            Gets the size of the page.
+            </summary>
+            <value>20</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2.TotalCount">
+            <summary>
+            Gets the total count.
+            </summary>
+            <value>The total count.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2.TotalPages">
+            <summary>
+            Gets the total pages.
+            </summary>
+            <value>The total pages.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2.IndexFrom">
+            <summary>
+            Gets the index from.
+            </summary>
+            <value>2</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2.Items">
+            <summary>
+            Gets the items.
+            </summary>
+            <value>The items.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2.HasPreviousPage">
+            <summary>
+            Gets the has previous page.
+            </summary>
+            <value>The has previous page.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2.HasNextPage">
+            <summary>
+            Gets the has next page.
+            </summary>
+            <value>The has next page.</value>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2.#ctor(System.Collections.Generic.IEnumerable{`0},System.Func{System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`1}},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2" /> class.
+            </summary>
+            <param name="source">The source</param>
+            <param name="converter">The converter</param>
+            <param name="pageIndex">The index of the page</param>
+            <param name="pageSize">The size of the page</param>
+            <param name="indexFrom">The start index value</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2.#ctor(Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList{`0},System.Func{System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEnumerable{`1}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList`2" /> class.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="converter">The converter.</param>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList">
+            <summary>
+            Provides some help methods for <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> interface.
+            </summary>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList.Empty``1">
+            <summary>
+            Creates an empty of <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/>.
+            </summary>
+            <typeparam name="T">The type for paging </typeparam>
+            <returns>An empty instance of <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/>.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Collections.PagedList.From``2(Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList{``1},System.Func{System.Collections.Generic.IEnumerable{``1},System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Creates a new instance of <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> from source of <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> instance.
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <param name="source">The source.</param>
+            <param name="converter">The converter.</param>
+            <returns>An instance of <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/>.</returns>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Extensions.IEnumerablePagedListExtensions">
+            <summary>
+            Provides some extension methods for <see cref="T:System.Collections.Generic.IEnumerable`1"/> to provide paging capability.
+            </summary>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Extensions.IEnumerablePagedListExtensions.ToPagedList``1(System.Collections.Generic.IEnumerable{``0},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Converts the specified source to <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> by the specified <paramref name="pageIndex"/> and <paramref name="pageSize"/>.
+            </summary>
+            <typeparam name="T">The type of the source.</typeparam>
+            <param name="source">The source to paging.</param>
+            <param name="pageIndex">The index of the page.</param>
+            <param name="pageSize">The size of the page.</param>
+            <param name="indexFrom">The start index value.</param>
+            <returns>An instance of the inherited from <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> interface.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Extensions.IEnumerablePagedListExtensions.ToPagedList``2(System.Collections.Generic.IEnumerable{``0},System.Func{System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1}},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Converts the specified source to <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> by the specified <paramref name="converter"/>, <paramref name="pageIndex"/> and <paramref name="pageSize"/>
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TResult">The type of the result</typeparam>
+            <param name="source">The source to convert.</param>
+            <param name="converter">The converter to change the <typeparamref name="TSource"/> to <typeparamref name="TResult"/>.</param>
+            <param name="pageIndex">The page index.</param>
+            <param name="pageSize">The page size.</param>
+            <param name="indexFrom">The start index value.</param>
+            <returns>An instance of the inherited from <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> interface.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.ProviderSelected.GetSuportedProviders">
+            <summary>
+            Retorna uma string, separado por virgula, com todos os prividers suportados pelos metodos de extenção
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.ProviderSelected.ProviderName">
+            <summary>
+            Suported: <see cref="F:Nuuvify.CommonPack.UnitOfWork.Abstraction.ProviderSelected.SuportedProviders" />
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1">
+            <summary>
+            Provides the interface(s) for paged list of any type.
+            </summary>
+            <typeparam name="T">The type for paging.</typeparam>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1.IndexFrom">
+            <summary>
+            Gets the index start value.
+            </summary>
+            <value>The index start value.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1.PageIndex">
+            <summary>
+            Gets the page index (current).
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1.PageSize">
+            <summary>
+            Gets the page size.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1.TotalCount">
+            <summary>
+            Gets the total count of the list of type <typeparamref name="T"/>
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1.TotalPages">
+            <summary>
+            Gets the total pages.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1.Items">
+            <summary>
+            Gets the current page items.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1.HasPreviousPage">
+            <summary>
+            Gets the has previous page.
+            </summary>
+            <value>The has previous page.</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1.HasNextPage">
+            <summary>
+            Gets the has next page.
+            </summary>
+            <value>The has next page.</value>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IIQueryablePageList.ToPagedListAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Converts the specified source to <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> by the specified <paramref name="pageIndex"/> and <paramref name="pageSize"/>.
+            </summary>
+            <typeparam name="T">The type of the source.</typeparam>
+            <param name="source">The source to paging.</param>
+            <param name="pageIndex">The index of the page.</param>
+            <param name="pageSize">The size of the page.</param>
+            <param name="cancellationToken">to observe while waiting for the task to complete.</param>
+            <param name="indexFrom">The start index value.</param>
+            <returns>An instance of the inherited from <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> interface.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IIQueryablePageList.ToPagedList``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Converts the specified source to <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> by the specified <paramref name="pageIndex"/> and <paramref name="pageSize"/>.
+            </summary>
+            <typeparam name="T">The type of the source.</typeparam>
+            <param name="source">The source to paging.</param>
+            <param name="pageIndex">The index of the page.</param>
+            <param name="pageSize">The size of the page.</param>
+            <param name="indexFrom">The start index value.</param>
+            <returns>An instance of the inherited from <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> interface.</returns>        
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1">
+            <summary>
+            Defines the interfaces for generic repository.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1.SaveChangesAsync(System.Boolean,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Save changes to the AutoHistory table 
+            (Important: You must have created the table in the database, and configured AutoHistory 
+            in your DbContext class)
+            <code>
+            <example>
+                modelBuilder.EnableAutoHistory{AutoHistory}(o =>
+                {
+                    o.ProviderName = Database.ProviderName;
+                });
+            </example>
+            </code>
+            </summary>
+            <param name="ensureAutoHistory">If configured, save changes to AutoHistory</param>
+            <param name="actualRegistry">In a processing loop, pass the registry count, 
+            if the result of (actualRegistry / limitCommit) is zero, that is, every time the 
+            quantity established in limitCommit is processed, it will be implemented in the database.
+            </param>
+            <param name="limitCommit">Number of records to run Commit</param>
+            <param name="toSave">Persist the data in the database</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1.Add(`0,System.Threading.CancellationToken)">
+            <summary>
+            Add the specified entity
+            </summary>
+            <param name="entity">The entities.</param>
+            <param name="cancellationToken">to observe while waiting for the task to complete.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1.Add(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <summary>
+            Inserts a range of entities asynchronously.
+            </summary>
+            <param name="entities">The entities to insert.</param>
+            <param name="cancellationToken">to observe while waiting for the task to complete.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1.Update(`0)">
+            <summary>
+            Updates the specified entity
+            </summary>
+            <param name="entity">The entities.</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1.Update(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Updates the specified entities.
+            </summary>
+            <param name="entities">The entities.</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1.Remove(System.Object,System.Boolean)">
+            <summary>
+            Deletes the entity by the specified primary key.
+            </summary>
+            <param name="id">The primary key value.</param>
+            <param name="createInstance">An instance of the object will be created and a find will be executed by the id parameter, if the record is found it will be marked as EntityState.Deleted</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1.Remove(`0)">
+            <summary>
+            Deletes the specified entity.
+            </summary>
+            <param name="entity">The entity to delete.</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1.Remove(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Deletes the specified entities.
+            </summary>
+            <param name="entities">The entities.</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1.ChangeEntityState(`0,Nuuvify.CommonPack.UnitOfWork.Abstraction.ValueObjects.EfEntityState)">
+            <summary>
+            Change entity state for patch method on web api.
+            </summary>
+            <param name="entity">The entity.</param>
+            <param name="state">The entity state.</param>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1">
+             <summary>
+             Example use:
+             <example>
+             <code>
+                 var projection = _repository.GetFirstOrDefault(selector: b => new MyClassQueryResult { Name = b.Title, Link = b.Url }, predicate: x => x.Title.Contains(term));
+            
+                 var list = _repository.GetAllAsync(include: source => source.Include(blog => blog.Posts).ThenInclude(post => post.Comments));
+             PageList:
+                 var items = _repository.GetPagedList(selector: b => MyClassQueryResult new { Name = b.Title, Link = b.Url });
+             or
+                 return await _repository.GetPagedListAsync(pageIndex: pageIndex, pageSize: pageSize);
+             OrderBy:
+                 var order = _repository.GetFirstOrDefault(predicate: x => x.Title.Contains(term), orderBy: source => source.OrderByDescending(b => b.Id));
+             </code>
+             </example>
+             </summary>
+             <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.Include(System.String[])">
+            <summary>
+            Specifies the names of the navigation properties which should be eagerly loaded only in the subsequent query results.
+            </summary>
+            <param name="navigationProperties">The navigation properties to be eagerly loaded in the query results.</param>
+            <returns>An <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1"/> containing the navigation properties specified in ths method and in the Includes property.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetPagedList``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> based on a predicate, orderby delegate and page information. This method default no-tracking query.
+            <example>
+            var items = _repository.GetPagedList(selector: b => new MyClassQueryResult { Name = b.Title, Link = b.Url });
+            </example>
+            </summary>
+            <remarks>This method default no-tracking query.</remarks>
+            <param name="selector">The selector for projection.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="pageIndex">The index of page.</param>
+            <param name="pageSize">The size of the page.</param>
+            <param name="indexFrom">The start index value.</param>
+            <param name="disableTracking"><c>True</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+            <returns>An <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> that contains elements that satisfy the condition specified by <paramref name="predicate"/>.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Gets the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> based on a predicate, orderby delegate and page information. This method default no-tracking query.
+            </summary>
+            <remarks>This method default no-tracking query.</remarks>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="pageIndex">The index of page.</param>
+            <param name="pageSize">The size of the page.</param>
+            <param name="indexFrom">The start index value.</param>
+            <param name="disableTracking"><c>True</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+            <returns>An <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> that contains elements that satisfy the condition specified by <paramref name="predicate"/>.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetPagedListAsync``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Gets the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> based on a predicate, orderby delegate and page information. This method default no-tracking query.
+            <example>
+            var items = _repository.GetPagedListAsync(selector: b => new MyClassQueryResult { Name = b.Title, Link = b.Url });
+            </example>
+            </summary>
+            <remarks>This method default no-tracking query.</remarks>
+            <param name="selector">The selector for projection.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="pageIndex">The index of page.</param>
+            <param name="pageSize">The size of the page.</param>
+            <param name="indexFrom">The start index value.</param>
+            <param name="disableTracking"><c>True</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+            <param name="cancellationToken">to observe while waiting for the task to complete. </param>
+            <returns>An <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> that contains elements that satisfy the condition specified by <paramref name="predicate"/>.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetPagedListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Gets the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> based on a predicate, orderby delegate and page information. This method default no-tracking query.
+            </summary>
+            <remarks>This method default no-tracking query.</remarks>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="pageIndex">The index of page.</param>
+            <param name="pageSize">The size of the page.</param>
+            <param name="indexFrom">The start index value.</param>
+            <param name="disableTracking"><c>True</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+            <param name="cancellationToken">to observe while waiting for the task to complete. </param>
+            <returns>An <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> that contains elements that satisfy the condition specified by <paramref name="predicate"/>.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetFirstOrDefault(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the first or default entity based on a predicate, orderby delegate and include delegate. This method defaults to a read-only, no-tracking query.
+            </summary>
+            <remarks>This method defaults to a read-only, no-tracking query.</remarks>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="disableTracking"><c>true</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetFirstOrDefault``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the first or default entity based on a predicate, orderby delegate and include delegate. This method defaults to a read-only, no-tracking query.
+            <example>
+            var items = _repository.GetFirstOrDefault(selector: b => new MyClassQueryResult { Name = b.Title, Link = b.Url });
+            </example>
+            </summary>
+            <remarks>This method defaults to a read-only, no-tracking query.</remarks>
+            <param name="selector">The selector for projection.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="disableTracking"><c>true</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetFirstOrDefaultAsync``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the first or default entity based on a predicate, orderby delegate and include delegate. This method defaults to a read-only, no-tracking query.
+            <example>
+            var items = _repository.GetFirstOrDefaultAsync(selector: b => new MyClassQueryResult { Name = b.Title, Link = b.Url });
+            </example>
+            </summary>
+            <remarks>Ex: This method defaults to a read-only, no-tracking query.</remarks>
+            <param name="selector">The selector for projection.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="disableTracking"><c>true</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetFirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean)">
+            <summary>
+            Gets the first or default entity based on a predicate, orderby delegate and include delegate. This method defaults to a read-only, no-tracking query.
+            </summary>
+            <remarks>Ex: This method defaults to a read-only, no-tracking query. </remarks>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="disableTracking"><c>true</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.FromSql(System.String,System.Object[])">
+            <summary>
+            Uses raw SQL queries to fetch the specified <typeparamref name="TEntity" /> data.
+            </summary>
+            <param name="sql">The raw SQL.</param>
+            <param name="parameters">The parameters.</param>
+            <returns>An <see cref="T:System.Linq.IQueryable`1" /> that contains elements that satisfy the condition specified by raw SQL.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.Find(System.Object[])">
+            <summary>
+            Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
+            </summary>
+            <param name="keyValues">The values of the primary key for the entity to be found.</param>
+            <returns>The found entity or null.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.FindAsync(System.Object[])">
+            <summary>
+            Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
+            </summary>
+            <param name="keyValues">The values of the primary key for the entity to be found.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous find operation. The task result contains the found entity or null.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.FindAsync(System.Object[],System.Threading.CancellationToken)">
+            <summary>
+            Finds an entity with the given primary key values. If found, is attached to the context and returned. If no entity is found, then null is returned.
+            </summary>
+            <param name="keyValues">The values of the primary key for the entity to be found.</param>
+            <param name="cancellationToken">to observe while waiting for the task to complete.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous find operation. The task result contains the found entity or null.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetAll">
+            <summary>
+            Gets all entities. This method is not recommended, use GetAll With predicate:
+            </summary>
+            <returns>The <see cref="T:System.Linq.IQueryable`1"/>.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetAll(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Gets all entities based on a predicate.
+            </summary>
+            <remarks>Ex: This method defaults to a read-only, no-tracking query.</remarks>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="disableTracking"><c>true</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+            <param name="skip">Number of records that the query should skip</param>
+            <param name="take">Number of records that the query should return, If this parameter is 0, skip, take will be ignored</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetAllAsync``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Gets all entities based on a predicate, with only the properties you choose with selector 
+            <example>
+            var items = _repository.GetAllAsync(selector: b => new MyClassQueryResult { Name = b.Title, Link = b.Url });
+            </example>
+            </summary>
+            <remarks>Ex: This method defaults to a read-only, no-tracking</remarks>
+            <param name="selector">Select the properties you want to get as a return.</param>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="disableTracking"><c>true</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+            <param name="skip">Number of records that the query should skip</param>
+            <param name="take">Number of records that the query should return, If this parameter is 0, skip, take will be ignored</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetAllAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Gets all entities based on a predicate.
+            </summary>
+            <remarks>Ex: This method defaults to a read-only, no-tracking query.</remarks>
+            <param name="predicate">A function to test each element for a condition.</param>
+            <param name="orderBy">A function to order elements.</param>
+            <param name="disableTracking"><c>true</c> to disable changing tracking; otherwise, <c>false</c>. Default to <c>true</c>.</param>
+            <param name="ignoreQueryFilters">Ignore query filters</param>
+            <param name="skip">Number of records that the query should skip</param>
+            <param name="take">Number of records that the query should return, If this parameter is 0, skip, take will be ignored</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.GetAllAsync">
+            <summary>
+            Gets all entities. This method is not recommended, use GetAll With predicate:
+            </summary>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets the count based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.CountAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets async the count based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.LongCount(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets the long count based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.LongCountAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets async the long count based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.Max``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Gets the max based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <param name="selector"></param>
+            <returns>decimal</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.MaxAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Gets the async max based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <param name="selector"></param>
+            <returns>decimal</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.Min``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Gets the min based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <param name="selector"></param>
+            <returns>decimal</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.MinAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Gets the async min based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <param name="selector"></param>
+            <returns>decimal</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.Average(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Decimal}})">
+            <summary>
+            Gets the average based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <param name="selector"></param>
+            <returns>decimal</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.AverageAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Decimal}})">
+            <summary>
+            Gets the async average based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <param name="selector"></param>
+            <returns>decimal</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.Sum(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Decimal}})">
+            <summary>
+            Gets the sum based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <param name="selector"></param>
+            <returns>decimal</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.SumAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Decimal}})">
+            <summary>
+            Gets the async sum based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <param name="selector"></param>
+            <returns>decimal</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.Exists(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets the Exists record based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepositoryReadOnly`1.ExistsAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <summary>
+            Gets the Async Exists record based on a predicate.
+            </summary>
+            <param name="predicate"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork">
+            <summary>
+            Defines the interface(s) for unit of work.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork.UsernameContext">
+            <value>Get or Set user current context</value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork.UserIdContext">
+            <value>Get or Set unique user identification current context</value>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork.SaveChangesAsync(System.Boolean,System.Int32,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Asynchronously saves all changes made in this unit of work to the database.
+            </summary>
+            <param name="ensureAutoHistory">If configured, save changes to AutoHistory</param>
+            <param name="actualRegistry">In a processing loop, pass the registry count, 
+            if the result of:
+            <code>
+                 Math.DivRem(actualRegistry, limitCommit, out int resto);
+                 if (resto == 0)
+            </code> 
+            resto is zero, that is, every time the quantity established in limitCommit is processed, 
+            it will be implemented in the database.
+            </param>
+            <param name="limitCommit">Number of records to run Commit</param>
+            <param name="toSave">Persist the data in the database</param>
+            <param name="cancellationToken"></param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous save operation. The task result contains the number of state entities written to database.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork.ExecuteSqlCommand(System.String,System.Object[])">
+            <summary>
+            Executes the specified SQL command with the ExecuteSqlRaw method 
+            </summary>
+            <param name="sql">The raw SQL.</param>
+            <param name="parameters">The parameters.</param>
+            <returns>The number of state entities written to database.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork.FromSql``1(System.String,System.Object[])">
+            <summary>
+            Uses raw SQL queries to fetch the specified <typeparamref name="TEntity"/> data.
+            Use the FromSqlRaw
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="sql">The raw SQL.</param>
+            <param name="parameters">The parameters.</param>
+            <returns>An <see cref="T:System.Linq.IQueryable`1"/> that contains elements that satisfy the condition specified by raw SQL.</returns>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork`1">
+            <summary>
+            Defines the interface(s) for generic unit of work.
+            </summary>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork`1.DbContext">
+            <value>Gets the db context.</value>
+            <returns>The instance of type <typeparamref name="TContext"/>.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork`1.SaveChangesAsync(System.Boolean,System.Int32,System.Int32,System.Boolean,System.Threading.CancellationToken,Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork[])">
+            <summary>
+            Saves all changes made in this context to the database with distributed transaction.
+            if the result of:
+            <example>
+            <code>
+                 Math.DivRem(actualRegistry, limitCommit, out int resto);
+                 if (resto == 0)
+            </code> 
+            </example>
+            resto is zero, that is, every time the quantity established in limitCommit is processed, 
+            it will be implemented in the database.
+            </summary>
+            <param name="ensureAutoHistory">If configured, save changes to AutoHistory</param>
+            <param name="actualRegistry">In a processing loop, pass the registry count</param>
+            <param name="limitCommit">Number of records to run Commit</param>
+            <param name="toSave">Persist the data in the database</param>
+            <param name="cancellationToken"></param>
+            <param name="unitOfWorks">An optional <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork"/> array.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task`1"/> that represents the asynchronous save operation. The task result contains the number of state entities written to database.</returns>
+        </member>
+    </members>
+</doc>

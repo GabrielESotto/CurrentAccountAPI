@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="AccountsStatements\Commands\Validators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nuuvify.CommonPack.Domain" Version="1.6.2-preview.23100406" />
+    <PackageReference Include="Nuuvify.CommonPack.UnitOfWork.Abstraction" Version="1.6.2-preview.23100404" />
+  </ItemGroup>
+
+</Project>

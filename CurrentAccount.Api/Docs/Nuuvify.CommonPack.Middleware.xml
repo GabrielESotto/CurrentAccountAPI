@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nuuvify.CommonPack.Middleware</name>
+    </assembly>
+    <members>
+        <member name="T:Nuuvify.CommonPack.Middleware.BaseCustomController">
+            <summary>
+            Essa classe deve ser implementada por herança nas controllers, caso precise personalisar alguma funcionalidade
+            você deve utilizar override nos metodos ou escrever seus proprios metodos
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Middleware.ConfigurationCustom">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Middleware.ConfigurationCustom.ConfigurationOptions``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Middleware.ConfigurationCustom.GetSection(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Middleware.ConfigurationCustom.GetChildren(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Middleware.Extensions.FormFileCollectionExtensions.GetFilesBase64(Microsoft.AspNetCore.Http.IFormFileCollection,System.String)">
+            <summary>
+            Retorna uma lista de arquivos, onde:
+            <para>Key = é composto por prefixFileName_FileName</para>
+            <para>Value = conteudo do arquivo no formato byte[]</para>
+            </summary>
+            <param name="files"></param>
+            <param name="prefixFileName">Example: IdDocument_TypeDocument</param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Middleware.FileStreamResultCustom.GetFileContentType(System.String,System.String)">
+            <summary>
+            Retorna o ContentType do arquivo informado, ou retorna o default
+            </summary>
+            <param name="fileName"></param>
+            <param name="defaultContentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Middleware.FileStreamResultCustom.Create(System.String)">
+             <summary>
+             Informe o nome do arquivo que sera utilizado no download, ou mantenha null <br/>
+             para baixar com o nome do storage. Exemplo de uso, na Controller:
+             <example>
+             <code>
+                  var fileStreamResult = fileStreamCustom.Create();
+            
+                  if (fileStreamResult.NotNullOrZero())
+                  {
+                      foreach (var item in fileStreamResult)
+                      {
+                          await item.ExecuteResultAsync(this.ControllerContext);
+                      }
+            
+                      return new OkResult();
+                  }
+            
+                  return new NoContentResult();
+             </code>
+             </example>
+             </summary>
+             <param name="fileName">Nome para download</param>
+             <returns></returns>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Middleware.Filters.ApiKeyAttribute">
+            <summary>
+            [ApiKey(KeyName = new string[] {"MyKeyName")] deve ser utilizado em sua Controller ou Action, se utiliza-lo, não utilize [Authorize] <br/>
+            O parametro "KeyName" deve corresponder, obrigatoriamente a uma entrada no serviço de VAULT <br/>
+            [ApiKey(KeyName = new string[] {"MyKeyName")] ou <br/>
+            [ApiKey(KeyName = new string[] {"MyKeyName", "OtherKeyName")] <br/>
+            </summary>
+        </member>
+        <member name="T:Nuuvify.CommonPack.Middleware.Handle.IGlobalHandleException">
+            <summary>
+            Essa interface necessita de Microsoft.AspNetCore.Http 
+            por esse motivo deve ser mantida nessa DLL e não em Abstraction
+            </summary>
+        </member>
+        <member name="M:Nuuvify.CommonPack.Middleware.Handle.HandlingHeadersMiddleware.SetRequestConfiguration(Microsoft.AspNetCore.Http.HttpContext)">
+             <summary>
+             Exemplo para leitura de body da request
+             <example>
+             <code>
+                 context.Request.EnableRewind();
+                 var buffer = new byte[Convert.ToInt32(context.Request.ContentLength)];
+                 await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
+                 var requestBody = Encoding.UTF8.GetString(buffer);
+                 context.Request.Body.Seek(0, SeekOrigin.Begin);
+            
+                 if (!string.IsNullOrWhiteSpace(requestBody))
+                     _logger.LogInformation("Corpo da request: {requestBody}", requestBody);
+             </code>
+             </example>
+             </summary>
+             <param name="httpContext"></param>
+             <returns></returns>
+        </member>
+    </members>
+</doc>
