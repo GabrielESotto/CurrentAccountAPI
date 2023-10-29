@@ -6,10 +6,7 @@ namespace CurrentAccount.Dto
     {
         public static MapperConfiguration RegisterMappings()
         {
-            var config = new MapperConfiguration(ps =>
-            {
-
-            });
+            var config = new MapperConfiguration(ps => {});
 
             return config;
         }
