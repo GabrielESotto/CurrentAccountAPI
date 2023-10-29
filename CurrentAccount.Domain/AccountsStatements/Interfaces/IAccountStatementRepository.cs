@@ -1,8 +1,8 @@
-﻿using Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces;
+﻿using CurrentAccount.Domain.Interfaces;
 
 namespace CurrentAccount.Domain.AccountsStatements.Interfaces
 {
-    public interface IAccountStatementRepository : IRepository<AccountStatement>
+    public interface IAccountStatementRepository : IBaseRepository<AccountStatement>
     {
 
     }

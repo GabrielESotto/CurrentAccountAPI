@@ -1,10 +1,8 @@
-﻿using Nuuvify.CommonPack.Domain;
-
-namespace CurrentAccount.Domain.AccountsStatements
+﻿namespace CurrentAccount.Domain.AccountsStatements
 {
-    public class AccountStatement : DomainEntity
+    public class AccountStatement : Entity
     {
-        protected AccountStatement() { }
+        public AccountStatement() { }
 
         private AccountStatement(string description, DateTime date, decimal value, AccountStatementAvulso detached, AccountStatementStatus status)
         {
@@ -26,14 +24,16 @@ namespace CurrentAccount.Domain.AccountsStatements
             return new AccountStatement(description, date, value, detached, status);
         }
 
-        public void Update(string description, DateTime date, decimal value, AccountStatementAvulso detached, AccountStatementStatus status)
+        public void Update(DateTime date, decimal value)
         {
-            Description = description;
-            Date = date; 
-            Value = value; 
-            Detached = detached; 
-            Status = status;
+            Date = date;
+            Value = value;
         }
-    
+
+        public void Cancel()
+        {
+            Status = AccountStatementStatus.Cancelado;
+        }
+
     }
 }

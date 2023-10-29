@@ -11,92 +11,40 @@ namespace CurrentAccount.Data.Context
 {
     public class SqlDbContext : DbContext
     {
-        public readonly string ownerDB;
-        public readonly IConfigurationCustom Configuration;
-
-        public SqlDbContext(IConfigurationCustom configuration)
-        {
-            Configuration = configuration;
-            ownerDB = Configuration.GetSectionValue("AppConfig:OwnerDB:Schema");
-        }
-
-        public SqlDbContext(DbContextOptions<SqlDbContext> options, IConfigurationCustom configuration) : base(options) 
-        {
-            Configuration = configuration;
-            ownerDB = Configuration.GetSectionValue("AppConfig:OwnerDB:Schema");
-        }
+        public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options) { }
 
         public DbSet<AccountStatement> AccountsStatements { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if(!optionsBuilder.IsConfigured)
-            {
-                var cnn = Configuration.GetSectionValue("AppConfig:OwnerDB:Schema");
-
-                optionsBuilder.UseSqlServer(Configuration.GetConnectionString(cnn))
-                    .UseLazyLoadingProxies()
-                    .ConfigureWarnings(warnings => warnings.Ignore(CoreEventId.DetachedLazyLoadingWarning))
-                    .EnableDetailedErrors()
-                    .EnableSensitiveDataLogging();
-            }
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.SetDatabaseProviderName(Database);
+            foreach (var property in modelBuilder.Model.GetEntityTypes()
+                .SelectMany(e => e.GetProperties()
+                    .Where(p => p.ClrType == typeof(string))))
+                property.SetColumnType("varchar(100)");
 
-            modelBuilder.HasDefaultSchema(ownerDB);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SqlDbContext).Assembly,
-                predicate: n => n.Namespace!.EndsWith(nameof(SqlDbContext)));
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SqlDbContext).Assembly);
 
-            modelBuilder.IgnoreValueObject();
-            modelBuilder.MappingPropertiesForgotten();
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
             base.OnModelCreating(modelBuilder);
         }
 
-        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
-            try
+            foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DataCadastro") != null))
             {
-                var registries = await SaveChangesAsync(true, cancellationToken);
-                Debug.WriteLine($"SaveChanges executado com sucesso para {registries} registros, e {this.GetAggregatesChanges()} registros em entidades agregadas");
-                return await Task.FromResult(registries);
-            }
-            catch (DbUpdateException ex)
-            {
-                PropertyValues proposedValues;
-                PropertyValues databaseValues;
-
-                var columnName = string.Empty;
-                var baseMessage = new StringBuilder()
-                    .AppendLine($"Houve um erro em SaveChanges, verifique o log de erro: {ex.Message} inner: {ex.InnerException?.Message}");
-
-                foreach (var entry in ex.Entries)
+                if (entry.State == EntityState.Added)
                 {
-                    proposedValues = entry.CurrentValues;
-                    databaseValues = entry.GetDatabaseValues();
-
-                    foreach (var property in proposedValues.Properties)
-                    {
-                        columnName = property.GetColumnName();
-                        baseMessage.AppendLine($"Proposed: {columnName} = {proposedValues[property]}");
-                        if (!(databaseValues?[property] is null))
-                        {
-                            baseMessage.AppendLine($"Database Value: {columnName} = {databaseValues?[property]}");
-                        }
-                    }
+                    entry.Property("DataCadastro").CurrentValue = DateTime.Now;
                 }
 
-                Debug.WriteLine($"{baseMessage}");
-                throw;
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("DataCadastro").IsModified = false;
+                }
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"{ex.Message} inner: {ex.InnerException?.Message}");
-                throw;
-            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
     }
 }

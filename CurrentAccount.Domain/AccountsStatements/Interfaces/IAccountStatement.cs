@@ -7,8 +7,9 @@ namespace CurrentAccount.Domain.AccountsStatements.Interfaces
 {
     public interface IAccountStatement : IBaseDomain,
         IRequestHandler<AccountStatementAddCommand, ICommandResultR>,
+        IRequestHandler<AccountStatementAddNotDetachedCommand, ICommandResultR>,
         IRequestHandler<AccountStatementUpdateCommand, ICommandResultR>,
-        IRequestHandler<AccountStatementDeleteCommand, ICommandResultR>
+        IRequestHandler<AccountStatementCancelCommand, ICommandResultR>
     {
     }
 }

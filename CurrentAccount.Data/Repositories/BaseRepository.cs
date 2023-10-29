@@ -1,39 +1,58 @@
-﻿using AutoMapper;
+﻿using CurrentAccount.Data.Context;
+using CurrentAccount.Domain;
+using CurrentAccount.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Nuuvify.CommonPack.Extensions.Notificator;
-using Nuuvify.CommonPack.UnitOfWork;
-using Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces;
 using System.Data;
+using System.Linq.Expressions;
 
 namespace CurrentAccount.Data.Repositories
 {
-    public abstract class BaseRepository<TEntity> : Repository<TEntity> where TEntity : class
+    public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : Entity, new()
     {
-        protected string ownerDB;
-        protected readonly IMapper _mapper;
-        protected IDbConnection cn;
-        protected BaseRepository(DbContext dbContext,
-            IUnitOfWork unitOfWork,
-            IMapper mapper) : base(dbContext, unitOfWork)
-        {
-            _mapper = mapper;
+        protected readonly SqlDbContext Db;
+        protected readonly DbSet<TEntity> DbSet;
 
-            dbContext.SetDbContextUsername(unitOfWork.UsernameContext, unitOfWork.UserIdContext);
+        protected BaseRepository(SqlDbContext db)
+        {
+            Db = db;
+            DbSet = db.Set<TEntity>();
         }
 
-        public virtual void SetDbConnection(IDbConnection dbConnection, string cnnString)
+        public virtual async Task<TEntity> GetById(Guid id)
         {
-            if (!(dbConnection == null))
-                cn = dbConnection;
-
-
-            if (string.IsNullOrWhiteSpace(cn?.ConnectionString))
-                cn.ConnectionString = cnnString;
+            return await DbSet.FindAsync(id);
         }
 
-        public virtual IList<NotificationR> ValidationResult()
+        public virtual async Task<List<TEntity>> GetAll()
         {
-            return GetNotifications();
+            return await DbSet.ToListAsync();
+        }
+
+        public virtual async Task Add(TEntity entity)
+        {
+            DbSet.Add(entity);
+            await SaveChanges();
+        }
+
+        public virtual async Task Update(TEntity entity)
+        {
+            DbSet.Update(entity);
+            await SaveChanges();
+        }
+
+        public virtual async Task Delete(TEntity entity)
+        {
+            DbSet.Remove(entity);
+            await SaveChanges();
+        }
+
+        public async Task<int> SaveChanges()
+        {
+            return await Db.SaveChangesAsync();
+        }
+        public void Dispose()
+        {
+            Db?.Dispose();
         }
     }
 }

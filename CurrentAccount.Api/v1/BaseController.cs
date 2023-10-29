@@ -1,54 +1,62 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Nuuvify.CommonPack.Extensions.Implementation;
-using Nuuvify.CommonPack.Extensions.Notificator;
-using Nuuvify.CommonPack.Middleware;
-using Nuuvify.CommonPack.Middleware.Abstraction.Results;
+﻿using CurrentAccount.Domain.Notifications;
+using CurrentAccount.Domain.Notifications.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CurrentAccount.Api.v1
 {
-    public class BaseController : BaseCustomController
+    public class BaseController : ControllerBase
     {
-        protected BaseController() { }
+        private readonly INotification _notification;
 
-        protected virtual async new Task<IActionResult> Response(
-            StatusCodeResult codigoRetornoSucesso,
-            StatusCodeResult codigoRetornoErro,
-            object result,
-            IEnumerable<NotificationR> notifications)
+        public BaseController(INotification notification)
         {
-            if (notifications.NotNullOrZero())
+            _notification = notification;
+        }
+
+        protected bool ValidOperation()
+        {
+            return !_notification.HasNotification();
+        }
+
+        protected ActionResult CustomResponse(object? result = null)
+        {
+            if (ValidOperation())
             {
-                var errorType = notifications.FirstOrDefault(x =>
-                    x.Property != null &&
-                    x.Property.StartsWith("ApiExterna"));
-
-                if (int.TryParse(errorType?.Message, out int codigoErro))
+                return Ok(new
                 {
-                    codigoRetornoErro = new StatusCodeResult(codigoErro);
-                }
-
-                var retornoPadronizado = StatusCode(codigoRetornoErro.StatusCode,
-                    new ReturnStandardErrors<NotificationR>
-                    {
-                        Success = false,
-                        Errors = notifications
-                    });
-
-                return await Task.FromResult(retornoPadronizado);
+                    success = true,
+                    data = result,
+                });
             }
-            else
+
+            return BadRequest(new
             {
-                var retornoPadronizado = StatusCode(StatusCodes.Status204NoContent, null);
+                success = false,
+                errors = _notification.GetNotifications().Select(e => e.Message)
+            });
+        }
 
-                if (!IsNull(result))
-                {
-                    var tipo = StatusCodeProducesResponseTypeAction(codigoRetornoSucesso);
-                    var retornoSucesso = GetInstanceResponse(tipo, result);
-                    retornoPadronizado = StatusCode(codigoRetornoSucesso.StatusCode, retornoSucesso);
-                }
+        protected ActionResult CustomResponse(ModelStateDictionary modelState)
+        {
+            if (!modelState.IsValid) NotificateErrorInvalidModel(modelState);
+            return CustomResponse();
+        }
 
-                return await Task.FromResult(retornoPadronizado);
+        protected void NotificateErrorInvalidModel(ModelStateDictionary modelState)
+        {
+            var errors = modelState.Values.SelectMany(e => e.Errors);
+
+            foreach (var error in errors)
+            {
+                var errorMessage = error.Exception == null ? error.ErrorMessage : error.Exception.Message;
+                NotificateError(errorMessage);
             }
+        }
+
+        protected void NotificateError(string errorMessage)
+        {
+            _notification.Handle(new Notification(errorMessage));
         }
     }
 }

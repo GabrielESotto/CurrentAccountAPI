@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="AccountsStatements\Commands\Validators\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Nuuvify.CommonPack.Domain" Version="1.6.2-preview.23100406" />
+    <PackageReference Include="FluentValidation" Version="11.8.0" />
+    <PackageReference Include="Nuuvify.CommonPack.Domain" Version="1.7.0-preview.23102502" />
     <PackageReference Include="Nuuvify.CommonPack.UnitOfWork.Abstraction" Version="1.6.2-preview.23100404" />
   </ItemGroup>
 

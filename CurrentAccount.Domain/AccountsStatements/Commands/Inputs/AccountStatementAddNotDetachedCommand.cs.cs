@@ -3,14 +3,18 @@ using System.Text.Json.Serialization;
 
 namespace CurrentAccount.Domain.AccountsStatements.Commands.Inputs
 {
-    public class AccountStatementUpdateCommand : ICommandR
+    public class AccountStatementAddNotDetachedCommand : ICommandR
     {
-        public Guid Id { get; set; }
+        public string Description { get; set; }
         public decimal Value { get; set; }
-        public DateTime Date { get; set; }
+        [JsonIgnore]
+        public AccountStatementAvulso Detached { get; set; } = AccountStatementAvulso.NaoAvulso;
+        [JsonIgnore]
+        public AccountStatementStatus Status { get; set; } = AccountStatementStatus.Valido;
         [JsonIgnore]
         public bool SaveChanges { get; set; } = true;
         [JsonIgnore]
         public bool RemoveNotificationsBeginning { get; set; }
     }
 }
+

@@ -15,8 +15,7 @@ namespace CurrentAccount.Data.Configs
 
             builder.Property(x => x.Id)
                 .IsRequired()
-                .IsUnicode(false)
-                .HasMaxLength(AccountStatement.MaxId);
+                .IsUnicode(false);
 
             builder.Property(x => x.Description)
                 .IsRequired()

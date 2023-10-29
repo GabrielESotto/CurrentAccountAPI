@@ -1,0 +1,413 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nuuvify.CommonPack.UnitOfWork</name>
+    </assembly>
+    <members>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.DbContextExtensions.DbContextUserId">
+            <summary>
+            Unique user identification
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.DbContextExtensions.SetAggregatesChanges(Microsoft.EntityFrameworkCore.DbContext,System.Int32)">
+            <summary>
+            Use zero to automatically increment the counter. Use -1 to reset the counter.
+            </summary>
+            <param name="context"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.DbContextExtensions.GetAggregatesChanges(Microsoft.EntityFrameworkCore.DbContext)">
+            <summary>
+            Returns the number of objects changed in the SaveChanges operation
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.IQueryableExtensions.ToPagedListAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Converts the specified source to <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> by the specified <paramref name="pageIndex"/> and <paramref name="pageSize"/>.
+            </summary>
+            <typeparam name="T">The type of the source.</typeparam>
+            <param name="source">The source to paging.</param>
+            <param name="pageIndex">The index of the page.</param>
+            <param name="pageSize">The size of the page.</param>
+            <param name="indexFrom">The start index value. indexFrom must always be less than pageIndex</param>
+            <param name="cancellationToken">to observe while waiting for the task to complete.</param>
+            <returns>An instance of the inherited from <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IPagedList`1"/> interface.</returns>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.ModelBuilderExtensions.IgnoreValueObject(Microsoft.EntityFrameworkCore.ModelBuilder,System.Type,Nuuvify.CommonPack.UnitOfWork.EIsOwner)">
+            <summary>
+            Extensão para ignorar objectos de valor "ValueObjects" dinamicamente
+            Todas as classes que implementarem a interface INotPersistingAsTable
+            serão ignoradas.
+            </summary>
+            <param name="modelBuilder"></param>
+            <param name="classIgnore">Informe uma classe ou interface que será ignorada</param>
+            <param name="isOwned">Use EIsOwner.None quando usar .UseSnakeCaseNamingConvention() </param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.ModelBuilderExtensions.MappingPropertiesForgotten(Microsoft.EntityFrameworkCore.ModelBuilder)">
+             <summary>
+             Essa extenção mapeia as propriedades esquecidas pelo desenvolvedor, atribuindo
+             a elas tamanho 50 ao invés de serem mapeadas como max
+             Use o metodo abaixo para informar o ProviderName desse contexto
+             <para> 
+             <c>
+             protected override void OnModelCreating(ModelBuilder modelBuilder)
+             {
+                 modelBuilder.SetDatabaseProviderName(Database);
+             }
+             </c>
+            </para>
+             </summary>
+             <param name="modelBuilder"></param>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.EntityConfiguration`1">
+            <summary>
+            Esta classe deve ser herdada pela sua classe de config do EntityFramework, <br/>
+            ela configura os campos de auditoria. <br/>
+            <para>
+            IMPORTANTE: O namespace da sua classe de config deve terminar sempre com o nome <br/>
+            da classe de contexto que ela faz parte, exemplo: namespace MinhaEmpresa.MinhaApp.Infra.Data.Configs.AppDbContext <br/>
+             <br/>
+            Utilize:  DefaultConfig(builder, "FATURAS", "FATURA"); <br/>
+            Auditoria:      AuditConfig(builder);  <br/>
+            se necessario:  AuditUserIdConfig(builder);  <br/>
+            ou ignore, caso sua tabela não necessite desses campos:   <br/>
+            AuditIgnore(builder);  <br/>
+            AuditUserIdIgnore(builder); <br/>
+            </para>   
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.EntityConfiguration`1.DefaultConfig(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0},System.String,System.String,System.String)">
+            <summary>
+            Sera mapeado a PK para o EF conforme o parametro informado, <br/>
+            <para>
+            esse campo na tabela será mapeado com a propriedade ID contida na classe 
+            de dominio TEntity <br/>
+            Caso necessite de uma PK com multiplos campos, crie no seu arquivo config:  <br/>
+            <br/>
+            builder.HasIndex(x => new {x.PROP1, x.PROP2, x.PROP3}) <br/>
+                   .HasName("IX_NOME_DO_INDICE") <br/>
+                   .IsUnique(); <br/>
+             <br/>
+            Para ignorar esse metodo, e fazer esse mapeamento manual, basta passar os parametros null <br/>
+             <br/>
+            DefaultConfig(builder, null, null)
+            </para>
+            </summary>
+            <param name="builder"></param>
+            <param name="tableName">Nome da tabela no banco de dados</param>
+            <param name="idColumnName">Nome da coluna PK</param>
+            <param name="pkSufix">Informe Null caso não queira o sufixo no final do campo PK, ou informe o sufixo que desejar</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.EntityConfiguration`1.AuditConfig(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
+            <summary>
+            Todas as tabelas devem possuir esses campos de auditoria
+            <para>
+            USUARIO_INCLUSAO <br/>
+            USUARIO_ALTERACAO <br/>
+            DATA_INCLUSAO <br/>
+            DATA_ALTERACAO <br/>
+            </para>
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.EntityConfiguration`1.AuditIgnore(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
+            <summary>
+            Ignore os campos de auditoria apenas para tabelas de sistemas legados, <br/>
+            sistema novo deve possuir todos os campos de auditoria
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.EntityConfiguration`1.AuditUserIdConfig(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
+            <summary>
+            Extenção dos campos de auditoria, implementam o ID do usuario de inclusão/alteração <br/>
+            USUARIO_ID_INCLUSAO <br/>
+            USUARIO_ID_ALTERACAO
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.EntityConfiguration`1.AuditUserIdIgnore(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder{`0})">
+            <summary>
+            Ignore os campos de extenção de auditoria, caso sua aplicação não necessite desses <br/>
+            campos, contudo, os campos padrões de auditoria são obrigatorios.
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.QueryablePageList.ToPagedList``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.QueryablePageList.ToPagedListAsync``1(System.Linq.IQueryable{``0},System.Int32,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.Repository`1">
+            <summary>
+            Represents a default generic repository implements the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1"/> interface.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Repository`1.#ctor(Microsoft.EntityFrameworkCore.DbContext,Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Repository`1"/> class.
+            </summary>
+            <param name="dbContext">The database context.</param>
+            <param name="unitOfWork"></param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Repository`1.Add(`0,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Repository`1.Add(System.Collections.Generic.IEnumerable{`0},System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Repository`1.Update(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Repository`1.Update(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Repository`1.Remove(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Repository`1.Remove(System.Object,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Repository`1.Remove(System.Collections.Generic.IEnumerable{`0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Repository`1.SaveChangesAsync(System.Boolean,System.Int32,System.Int32,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.Repository`1.ChangeEntityState(`0,Nuuvify.CommonPack.UnitOfWork.Abstraction.ValueObjects.EfEntityState)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1">
+            <summary>
+            Represents a default generic repository implements the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IRepository`1"/> interface.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.#ctor(Microsoft.EntityFrameworkCore.DbContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1"/> class.
+            </summary>
+            <param name="dbContext">The database context.</param>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetAllAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetAllAsync``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetAllAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetAll">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetAll(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetFirstOrDefault``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetFirstOrDefault(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetFirstOrDefaultAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetFirstOrDefaultAsync``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Boolean,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetPagedList(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetPagedList``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetPagedListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.GetPagedListAsync``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.Int32,System.Int32,System.Int32,System.Boolean,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.FromSql(System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.Find(System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.FindAsync(System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.FindAsync(System.Object[],System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.Count(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.CountAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.LongCount(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.LongCountAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.Max``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.MaxAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.Min``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.MinAsync``1(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.Average(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Decimal}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.AverageAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Decimal}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.Sum(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Decimal}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.SumAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,System.Decimal}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.Exists(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.RepositoryReadOnly`1.ExistsAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.UnitOfWork`1">
+            <summary>
+            Represents the default implementation of the <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork"/> and <see cref="T:Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork`1"/> interface.
+            </summary>
+            <typeparam name="TContext">The type of the db context.</typeparam>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.UnitOfWork`1.#ctor(`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nuuvify.CommonPack.UnitOfWork.UnitOfWork`1"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.UnitOfWork`1.DbContext">
+            <inheritdoc/>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.UnitOfWork`1.UsernameContext">
+            <inheritdoc/>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.UnitOfWork`1.UserIdContext">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.UnitOfWork`1.ExecuteSqlCommand(System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.UnitOfWork`1.FromSql``1(System.String,System.Object[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.UnitOfWork`1.SaveChangesAsync(System.Boolean,System.Int32,System.Int32,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.UnitOfWork`1.SaveChangesAsync(System.Boolean,System.Int32,System.Int32,System.Boolean,System.Threading.CancellationToken,Nuuvify.CommonPack.UnitOfWork.Abstraction.Interfaces.IUnitOfWork[])">
+            <inheritdoc/>
+        </member>
+        <member name="T:Nuuvify.CommonPack.UnitOfWork.UnitOfWorkSetup">
+            <summary>
+            Extension methods for setting up unit of work related services in an <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.UnitOfWorkSetup.AddUnitOfWork``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Registers the unit of work given context as a service in the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <typeparam name="TContext">The type of the db context.</typeparam>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add services to.</param>
+            <returns>The same service collection so that multiple calls can be chained.</returns>
+            <remarks>
+            This method only support one db context, if been called more than once, will throw exception.
+            </remarks>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.UnitOfWorkSetup.AddUnitOfWork``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Registers the unit of work given context as a service in the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <typeparam name="TContext1">The type of the db context.</typeparam>
+            <typeparam name="TContext2">The type of the db context.</typeparam>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add services to.</param>
+            <returns>The same service collection so that multiple calls can be chained.</returns>
+            <remarks>
+            This method only support one db context, if been called more than once, will throw exception.
+            </remarks>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.UnitOfWorkSetup.AddUnitOfWork``3(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Registers the unit of work given context as a service in the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <typeparam name="TContext1">The type of the db context.</typeparam>
+            <typeparam name="TContext2">The type of the db context.</typeparam>
+            <typeparam name="TContext3">The type of the db context.</typeparam>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add services to.</param>
+            <returns>The same service collection so that multiple calls can be chained.</returns>
+            <remarks>
+            This method only support one db context, if been called more than once, will throw exception.
+            </remarks>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.UnitOfWorkSetup.AddUnitOfWork``4(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Registers the unit of work given context as a service in the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <typeparam name="TContext1">The type of the db context.</typeparam>
+            <typeparam name="TContext2">The type of the db context.</typeparam>
+            <typeparam name="TContext3">The type of the db context.</typeparam>
+            <typeparam name="TContext4">The type of the db context.</typeparam>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add services to.</param>
+            <returns>The same service collection so that multiple calls can be chained.</returns>
+            <remarks>
+            This method only support one db context, if been called more than once, will throw exception.
+            </remarks>
+        </member>
+        <member name="M:Nuuvify.CommonPack.UnitOfWork.UnitOfWorkSetup.AddCustomRepository``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Registers the custom repository as a service in the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <typeparam name="TRepository">The type of the custom repositry.</typeparam>
+            <param name="services">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/> to add services to.</param>
+            <returns>The same service collection so that multiple calls can be chained.</returns>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Migrations.CustomObjectSqlOperation.ObjectName">
+            <summary>
+            Objects são utilizados dentro das functions ou procedures
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Migrations.CustomPkgSqlOperation.PkgName">
+            <summary>
+            Packages são utilizados dentro das functions ou procedures, ou, em alguns
+            casos como uma Tabela ou View
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:Nuuvify.CommonPack.UnitOfWork.Migrations.CustomViewSqlOperation.ViewName">
+            <summary>
+            Crie uma constante para usar em:
+            <para>
+            <c>
+            builder.ToView($"{SuaViewOperation.ViewName}");
+            </c>
+            </para>
+            </summary>
+            <value></value>
+        </member>
+    </members>
+</doc>
