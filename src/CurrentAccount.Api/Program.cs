@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Microsoft.EntityFrameworkCore;
+using Azure.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +15,18 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true, true)
     .AddEnvironmentVariables();
 
-builder.Services.AddDbContext<SqlDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetSection("DefaultConnection").Value));
+var keyVaultUrl = builder.Configuration.GetSection("KeyVaultURL").Value!;
+var tenantId = builder.Configuration.GetSection("TenantId").Value!;
+var clientId = builder.Configuration.GetSection("ClientId").Value!;
+var clientSecret = builder.Configuration.GetSection("ClientSecret").Value!;
+
+var credential = new ClientSecretCredential(tenantId, clientId, clientSecret);
+
+builder.Configuration.AddAzureKeyVault(new Uri(keyVaultUrl), credential);
+
+var cnnString = builder.Configuration.GetSection("ConnectionStrings:CnnSqlDatabase").Value!;
+
+builder.Services.AddDbContext<SqlDbContext>(options => options.UseSqlServer(cnnString));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
