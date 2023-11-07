@@ -3,19 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EDB7FD0E-B9ED-44B5-BD42-B372ED0F1E80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Api", "src\CurrentAccount.Api\CurrentAccount.Api.csproj", "{D835DDFB-9F72-4557-B6AF-DC1D760727A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Api", "src\CurrentAccount.Api\CurrentAccount.Api.csproj", "{D835DDFB-9F72-4557-B6AF-DC1D760727A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Data", "src\CurrentAccount.Data\CurrentAccount.Data.csproj", "{A07A2E1A-6707-4599-B8F9-0B2C270DD22A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Data", "src\CurrentAccount.Data\CurrentAccount.Data.csproj", "{A07A2E1A-6707-4599-B8F9-0B2C270DD22A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Dto", "src\CurrentAccount.Dto\CurrentAccount.Dto.csproj", "{A8612B0F-52C0-4B1F-8605-10DDF38BC2B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Dto", "src\CurrentAccount.Dto\CurrentAccount.Dto.csproj", "{A8612B0F-52C0-4B1F-8605-10DDF38BC2B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Domain", "src\CurrentAccount.Domain\CurrentAccount.Domain.csproj", "{FCE4EE4E-BB92-4772-ADBF-F4A21AE2E8A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Domain", "src\CurrentAccount.Domain\CurrentAccount.Domain.csproj", "{FCE4EE4E-BB92-4772-ADBF-F4A21AE2E8A3}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4CA53259-4DA9-47EA-87FE-FC6FDD3C3187}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrentAccount.Domain.xTest", "test\CurrentAccount.Domain.xTest\CurrentAccount.Domain.xTest.csproj", "{A799B9B6-AB82-46CF-A1CE-3DD664BB06B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrentAccount.Domain.xTest", "test\CurrentAccount.Domain.xTest\CurrentAccount.Domain.xTest.csproj", "{A799B9B6-AB82-46CF-A1CE-3DD664BB06B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,12 +45,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {78BD375D-42CA-4D35-B627-6FADC7057A6C}
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D835DDFB-9F72-4557-B6AF-DC1D760727A1} = {EDB7FD0E-B9ED-44B5-BD42-B372ED0F1E80}
-		{A07A2E1A-6707-4599-B8F9-0B2C270DD22A} = {EDB7FD0E-B9ED-44B5-BD42-B372ED0F1E80}
-		{A8612B0F-52C0-4B1F-8605-10DDF38BC2B8} = {EDB7FD0E-B9ED-44B5-BD42-B372ED0F1E80}
-		{FCE4EE4E-BB92-4772-ADBF-F4A21AE2E8A3} = {EDB7FD0E-B9ED-44B5-BD42-B372ED0F1E80}
-		{A799B9B6-AB82-46CF-A1CE-3DD664BB06B7} = {4CA53259-4DA9-47EA-87FE-FC6FDD3C3187}
 	EndGlobalSection
 EndGlobal
